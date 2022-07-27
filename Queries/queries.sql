@@ -219,9 +219,35 @@ SELECT ce.emp_no,
 	ce.last_name,
 	dpt.dept_name
 INTO dept_info
-FROM current_emp as ce
+FROM current_emp AS ce
 INNER JOIN dept_employee AS de
 ON (ce.emp_no = de.emp_no)
 INNER JOIN departments AS dpt
 ON (de.dept_no = dpt.dept_no);
 
+SELECT * FROM retirement_info;
+SELECT * FROM departments;
+
+SELECT dm.emp_no,
+	ri.first_name,
+	ri.last_name,
+	dpt.dept_name
+INTO sales_retiree
+FROM retirement_info AS ri
+INNER JOIN dept_employee AS dm
+ON (ri.emp_no = dm.emp_no)
+INNER JOIN departments AS dpt
+ON (dm.dept_no = dpt.dept_no)
+WHERE dpt.dept_name = 'Sales';
+
+SELECT dm.emp_no,
+	ri.first_name,
+	ri.last_name,
+	dpt.dept_name
+INTO mentoring_program
+FROM retirement_info AS ri
+INNER JOIN dept_employee AS dm
+ON (ri.emp_no = dm.emp_no)
+INNER JOIN departments AS dpt
+ON (dm.dept_no = dpt.dept_no)
+WHERE dept_name IN ('Sales', 'Development');
